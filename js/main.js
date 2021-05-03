@@ -93,3 +93,17 @@ let film={
    director: getFilmsDirector(filmsDirectors),
 }
 
+function Film(){
+   this.title= getFilmsTitle(filmsTitle);
+   this.releseDate= getRandomData('01-01-2000','01-01-2020');
+   this.plot=getFilmsPlot(filmsPlots);
+   this.poster= getFilmsPoster(filmsPosters);
+   this.boxOffice= getBoxOffice(500000,1000000000);
+   this.rating= getRating(1,10);
+   this.director= getFilmsDirector(filmsDirectors);
+}
+
+let films=new Array(10);
+for (let i=0;i<10;i++){
+films[i]=new Film();
+}
