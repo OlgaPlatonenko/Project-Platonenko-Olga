@@ -83,16 +83,6 @@ function getFilmsDirector(filmsDirectors){
    return filmsDirectors[indDir];
 }
 
-let film={
-   title: getFilmsTitle(filmsTitle),
-   releseDate: getRandomData('01-01-2000','01-01-2020'),
-   plot: getFilmsPlot(filmsPlots),
-   poster: getFilmsPoster(filmsPosters),
-   boxOffice: getBoxOffice(500000,1000000000),
-   rating: getRating(1,10),
-   director: getFilmsDirector(filmsDirectors),
-}
-
 function Film(){
    this.title= getFilmsTitle(filmsTitle);
    this.releseDate= getRandomData('01-01-2000','01-01-2020');
@@ -107,3 +97,30 @@ let films=new Array(10);
 for (let i=0;i<10;i++){
 films[i]=new Film();
 }
+
+function renderFilms(films){
+   const templateCard=document.getElementById('card-template').content.querySelector('.card');
+   const filmlist=document.querySelector('.film-list');
+   cardNode=templateCard.cloneNode(true);
+   films.forEach(film => {
+      titleNode=templateCard.querySelector('.card-header__title');
+      releseDateNode=templateCard.querySelector('.film-info__release-date .film-info__text');
+      plotNode=templateCard.querySelector('.film-info__plot .film-info__text');
+      posterNode=templateCard.querySelector('.card-header__image');
+      boxOfficeNode=templateCard.querySelector('.film-info__box-office .film-info__text');
+      ratingNode=templateCard.querySelector('.film-info__rating .film-info__text');
+      directorNode=templateCard.querySelector('.film-info__director .film-info__text');
+
+      titleNode.textContent=film.title;
+      releseDateNode.textContent=film.releseDate;
+      plotNode.textContent=film.plot;
+      posterNode.src=film.poster;
+      boxOfficeNode.textContent=film.boxOffice;
+      ratingNode.textContent=film.rating;
+      directorNode.textContent=film.director;
+
+      filmlist.append(templateCard);
+   });
+}
+
+renderFilms(films);
