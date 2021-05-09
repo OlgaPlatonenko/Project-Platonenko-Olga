@@ -126,10 +126,17 @@ for (let i = 0; i < 10; i++) {
     films[i] = new Film();
 }
 
+//удаляет все дочерние элементы
+function removeAllChildNodes(parent) {
+    while (parent.firstChild) {
+        parent.removeChild(parent.firstChild);
+    }
+}
 
-function renderFilms(films) {
+function renderFilms(films) {    
     const templateCard = document.getElementById('card-template').content.querySelector('.card');
-    const filmlist = document.querySelector('.film-list');
+    let filmlist = document.querySelector('.film-list');
+    removeAllChildNodes(filmlist); //очистка filmlist
 
     films.forEach(film => {
         cardNode = templateCard.cloneNode(true);
@@ -141,11 +148,7 @@ function renderFilms(films) {
         ratingNode = cardNode.querySelector('.film-info__rating .film-info__text');
         directorNode = cardNode.querySelector('.film-info__director .film-info__text');
         favouriteButton = cardNode.querySelector('.card__button ');
-        /*  if (film.isFavourite){
-             favouriteButton.classList.add('button_remove');
-          } else{
-             favouriteButton.classList.add('button_add');
-          }*/
+       
         if (favoriteCheck.checked) {
             favouriteButton.classList.add('button_remove');
         } else {
@@ -160,7 +163,7 @@ function renderFilms(films) {
         ratingNode.textContent = film.rating;
         directorNode.textContent = film.director;
 
-        filmlist.append(cardNode);
+        filmlist.append(cardNode);      
 
     });
 }
@@ -169,27 +172,30 @@ renderFilms(films);
 
 //клики по плюсикам
 
+//let btnsAdd = document.getElementsByClassName('button_add');
+let favouriteFilm = [];
 let btnsAdd = document.getElementsByClassName('button_add');
 
-let favouriteFilm = [];
-
+const handleClickFavourite=function(event){
+    cardFoot = event.target.closest('div'); 
+   cardBody=cardFoot.previousElementSibling; 
+   cardHeader=cardBody.previousElementSibling; 
+   favoriteTitle=cardHeader.lastElementChild.innerText; 
+   let filmId=films.findIndex(function(film) { 
+    return film.title == favoriteTitle;
+  });
+  favouriteFilm.push(films[filmId]);
+  arrWithoutFavourite=films.filter((item,ind) => (ind!=filmId)); 
+  films=arrWithoutFavourite;
+  renderFilms(arrWithoutFavourite);
+  let btnsAdd = document.getElementsByClassName('button_add');
+  for (let btnAdd1 of btnsAdd) {
+    btnAdd1.addEventListener('click', handleClickFavourite, false);
+}
+}
 
 for (let btnAdd of btnsAdd) {
-    btnAdd.addEventListener('click', function(event) {
-        cardFoot = event.target.closest('div'); //где щелкнули footer
-        //пошли вверх до названия фильма
-       // prevBodyCard=cardFoot.previousElementSibling.classList;
-       cardBody=cardFoot.previousElementSibling; //на одном уровне с footer получили body
-       cardHeader=cardBody.previousElementSibling; //на одном уровне с body получили header
-       favoriteTitle=cardHeader.lastElementChild.innerText; //в header botv title
-       alert(favoriteTitle); //card-header__title текст
-     /* let filmId = films.filter(function(film) { //нашли режиссера а надо номер элемента в массиве фильмов
-        return film.title == favoriteTitle;
-      })[0].director;*/
-      let filmId=films.findIndex(function(film) { //нашли номер нужного фильма в массиве фильмов
-        return film.title == favoriteTitle;
-      });
-
-      alert(filmId);
-    })
+    btnAdd.addEventListener('click', handleClickFavourite);
 }
+
+//переразбить на модули
