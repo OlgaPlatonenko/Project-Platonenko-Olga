@@ -133,7 +133,7 @@ function removeAllChildNodes(parent) {
     }
 }
 
-function renderFilms(films) {    
+function renderFilms(films) {
     const templateCard = document.getElementById('card-template').content.querySelector('.card');
     let filmlist = document.querySelector('.film-list');
     removeAllChildNodes(filmlist); //очистка filmlist
@@ -148,7 +148,7 @@ function renderFilms(films) {
         ratingNode = cardNode.querySelector('.film-info__rating .film-info__text');
         directorNode = cardNode.querySelector('.film-info__director .film-info__text');
         favouriteButton = cardNode.querySelector('.card__button ');
-       
+
         if (favoriteCheck.checked) {
             favouriteButton.classList.add('button_remove');
         } else {
@@ -163,8 +163,7 @@ function renderFilms(films) {
         ratingNode.textContent = film.rating;
         directorNode.textContent = film.director;
 
-        filmlist.append(cardNode);      
-
+        filmlist.append(cardNode);
     });
 }
 
@@ -172,26 +171,25 @@ renderFilms(films);
 
 //клики по плюсикам
 
-//let btnsAdd = document.getElementsByClassName('button_add');
 let favouriteFilm = [];
 let btnsAdd = document.getElementsByClassName('button_add');
 
-const handleClickFavourite=function(event){
-    cardFoot = event.target.closest('div'); 
-   cardBody=cardFoot.previousElementSibling; 
-   cardHeader=cardBody.previousElementSibling; 
-   favoriteTitle=cardHeader.lastElementChild.innerText; 
-   let filmId=films.findIndex(function(film) { 
-    return film.title == favoriteTitle;
-  });
-  favouriteFilm.push(films[filmId]);
-  arrWithoutFavourite=films.filter((item,ind) => (ind!=filmId)); 
-  films=arrWithoutFavourite;
-  renderFilms(arrWithoutFavourite);
-  let btnsAdd = document.getElementsByClassName('button_add');
-  for (let btnAdd1 of btnsAdd) {
-    btnAdd1.addEventListener('click', handleClickFavourite, false);
-}
+const handleClickFavourite = function (event) {
+    cardFoot = event.target.closest('div');
+    cardBody = cardFoot.previousElementSibling;
+    cardHeader = cardBody.previousElementSibling;
+    favoriteTitle = cardHeader.lastElementChild.innerText;
+    let filmId = films.findIndex(function (film) {
+        return film.title == favoriteTitle;
+    });
+    favouriteFilm.push(films[filmId]);
+    arrWithoutFavourite = films.filter((item, ind) => (ind != filmId));
+    films = arrWithoutFavourite;
+    renderFilms(arrWithoutFavourite);
+    let btnsAdd = document.getElementsByClassName('button_add');
+    for (let btnAdd1 of btnsAdd) {
+        btnAdd1.addEventListener('click', handleClickFavourite, false);
+    }
 }
 
 for (let btnAdd of btnsAdd) {
