@@ -13,6 +13,7 @@ export function searchFilm() {
       let matchAll = title.innerHTML.match(regex);
       if (input.value.length >= 2 && matchAll != null) {
         title.style.color = 'red';
+     
       }
     });
   }
