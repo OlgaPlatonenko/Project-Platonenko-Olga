@@ -1,4 +1,3 @@
-import { films, Film } from '../modules/mock.js';
 
 export function searchFilm() {
 

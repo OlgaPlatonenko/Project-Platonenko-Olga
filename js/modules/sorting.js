@@ -1,8 +1,8 @@
 
-import { renderFilms } from '../modules/render.js';
+import { renderFilmsFromAPI } from '../modules/render2.js';
 
 function sortByRate(arr) {
-    return arr.sort((a, b) => a.rating > b.rating ? -1 : 1);
+    return arr.sort((a, b) => a.Rated > b.Rated ? -1 : 1);
 }
 
 export function sortByRating() {
@@ -14,22 +14,22 @@ export function sortByRating() {
         btnSortRate.classList.add('button_checked');
         let filmsNotSorted = JSON.parse(localStorage.getItem('allFilms'));
         let filmsSorted = sortByRate(filmsNotSorted);
-        renderFilms(filmsSorted);
+        renderFilmsFromAPI(filmsSorted);
     }
     btnSortRate.addEventListener('click', sortRate);
 }
 
 /*********************************** */
-
+/*
 function getDateFilm(str) {
     let arrDate = str.split('-');
     let newStrDate = '20' + arrDate[2] + '-' + arrDate[1] + '-' + arrDate[0];
     return new Date(newStrDate);
-}
+}*/
 
 function sortingDate(arr) {
     return arr.sort((a, b) => {      
-       return (new Date(getDateFilm(a.releseDate))).getTime() - (new Date(getDateFilm(b.releseDate))).getTime() ;
+       return (new Date(a.Released)).getTime() - (new Date(b.Released).getTime() );
     });
 }
 
@@ -41,16 +41,16 @@ export function sortByDate() {
         btnPrevChecked.classList.remove('button_checked');
         btnSortDate.classList.add('button_checked');
         let filmsNotSorted = JSON.parse(localStorage.getItem('allFilms'));
-      //  let newfilmsNotSorted = filmsNotSorted.map(obj => ({ ...obj, releseDate: getDateFilm(obj.releseDate) }))
+              //  let newfilmsNotSorted = filmsNotSorted.map(obj => ({ ...obj, releseDate: getDateFilm(obj.releseDate) }))
         let filmsSorted = sortingDate(filmsNotSorted);
-        renderFilms(filmsSorted);
+       renderFilmsFromAPI(filmsSorted);
     }
     btnSortDate.addEventListener('click', sortDate);
 }
 
 /************************ */
 function sortByboxOffice(arr) {
-    return arr.sort((a, b) => a.boxOffice > b.boxOffice ? -1 : 1);
+    return arr.sort((a, b) => a.BoxOffice > b.BoxOffice ? -1 : 1);
 }
 
 export function sortBoxOffice() {
@@ -62,7 +62,7 @@ export function sortBoxOffice() {
         btnSortBox.classList.add('button_checked');
         let filmsNotSorted = JSON.parse(localStorage.getItem('allFilms'));
         let filmsSorted = sortByboxOffice(filmsNotSorted);
-        renderFilms(filmsSorted);
+        renderFilmsFromAPI(filmsSorted);
     }
     btnSortBox.addEventListener('click', sortBoxOff);
 }
