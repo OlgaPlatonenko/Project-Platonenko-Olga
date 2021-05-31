@@ -2,7 +2,7 @@ import { getRandomInt } from '../modules/utils.js';
 //import { films, Film } from '../modules/mock.js';
 import { renderFilmsFromAPI } from '../modules/render2.js';
 import { getFilmsList } from '../modules/getFilmsFetch.js';
-
+import { initial } from '../modules/init.js';
 
 export function favFilms() {
     let favouriteFilm = [];
@@ -14,6 +14,7 @@ export function favFilms() {
     /************************************ */
     const handleCheckFavourite = function () {
         if (this.checked === true) {
+            initial();
             //renderFilms(favouriteFilm);
             renderFilmsFromAPI(JSON.parse(localStorage.getItem('favouriteFilms')));
             let btnsRemove = document.getElementsByClassName('button_remove');

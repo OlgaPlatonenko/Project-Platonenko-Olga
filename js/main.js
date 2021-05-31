@@ -6,6 +6,7 @@ import { renderFilmsFromAPI } from './modules/render2.js';
 import {favFilms} from './modules/favorite.js';
 import {searchFilm} from './modules/search.js';
 import {sortByRating,sortByDate,sortBoxOffice} from './modules/sorting.js';
+import {initial} from './modules/init.js';
 
 /*
 if (localStorage.getItem('allFilms')===null){
