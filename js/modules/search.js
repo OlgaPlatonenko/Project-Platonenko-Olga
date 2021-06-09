@@ -1,4 +1,3 @@
-
 export function searchFilm() {
 
   let filmList = document.getElementsByClassName('card-header__title');
@@ -11,11 +10,9 @@ export function searchFilm() {
       title.style.color = "#353535";
       let matchAll = title.innerHTML.match(regex);
       if (input.value.length >= 2 && matchAll != null) {
-        title.style.color = 'red';
-     
+        title.style.color = 'red';     
       }
     });
   }
   input.addEventListener('input', handleSearch);
-
 }

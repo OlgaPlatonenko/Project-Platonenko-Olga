@@ -110,7 +110,6 @@ export function Film() {
     this.rating = getRating(1, 10);
     this.director = getFilmsDirector(filmsDirectors);
     this.isFavourite = 'false';
-
 }
 
 export let films = new Array(10);

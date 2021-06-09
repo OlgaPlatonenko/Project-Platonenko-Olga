@@ -5,5 +5,4 @@ export function initial() {
     let btnPrevChecked = document.getElementsByClassName('button button_checked')[0];
     btnPrevChecked.classList.remove('button_checked');
     btnSortBox.classList.add('button_checked');
-
 }
